@@ -25,13 +25,13 @@ import com.example.playingwithmotionlayout.model.Item
 import com.example.playingwithmotionlayout.model.ListPreviewParameterProvider
 import com.example.playingwithmotionlayout.ui.theme.PlayingWithMotionLayoutTheme
 
-private const val BottomBarHeightFraction = 0.14f
-private const val TopBarHeightFraction = BottomBarHeightFraction / 2
-private val BarColor = Color(red = 0.816f, green = 0.922f, blue = 0.761f, alpha = 0.4f)
+const val BottomBarHeightFraction = 0.14f
+const val TopBarHeightFraction = BottomBarHeightFraction / 2
+val BarColor = Color(red = 0.816f, green = 0.922f, blue = 0.761f, alpha = 0.4f)
 
 @Preview(showBackground = true)
 @Composable
-fun AnimalCardPreview(
+fun GridItemCard(
     @PreviewParameter(ListPreviewParameterProvider::class) list: List<Item>
 ) {
     PlayingWithMotionLayoutTheme() {
