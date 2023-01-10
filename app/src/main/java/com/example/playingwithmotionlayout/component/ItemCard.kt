@@ -1,6 +1,5 @@
 package com.example.playingwithmotionlayout.component
 
-import android.content.ClipData
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -22,13 +21,13 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
-import com.example.model.Item
-import com.example.playingwithmotionlayout.dummyData.ListPreviewParameterProvider
+import com.example.playingwithmotionlayout.model.Item
+import com.example.playingwithmotionlayout.model.ListPreviewParameterProvider
 import com.example.playingwithmotionlayout.ui.theme.PlayingWithMotionLayoutTheme
 
 private const val BottomBarHeightFraction = 0.14f
 private const val TopBarHeightFraction = BottomBarHeightFraction / 2
-private val BarColor = Color(red = 0f, green = 0f, blue = 0f, alpha = 0.5f)
+private val BarColor = Color(red = 0.816f, green = 0.922f, blue = 0.761f, alpha = 0.4f)
 
 @Preview(showBackground = true)
 @Composable
@@ -59,17 +58,24 @@ fun GridItemCard(
     modifier: Modifier = Modifier
 ) {
     Card(
-        modifier = modifier.aspectRatio(0.66f),
+        modifier = modifier.aspectRatio(0.66f).padding(4.dp),
         shape = RoundedCornerShape(8.dp)
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
             item.itemImage?.let { painterResource(it) }?.let {
-                Image(
-                    painter = it,
-                    contentDescription = item.itemDescription,
-                    contentScale = ContentScale.FillWidth,
-                    modifier = Modifier.fillMaxWidth()
-                )
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(300.dp),
+                    elevation = 10.dp
+                ) {
+                    Image(
+                        painter = it,
+                        contentDescription = item.itemDescription,
+                        contentScale = ContentScale.FillWidth,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
             }
             TopBar()
             item.itemName?.let { BottomBar(it) }

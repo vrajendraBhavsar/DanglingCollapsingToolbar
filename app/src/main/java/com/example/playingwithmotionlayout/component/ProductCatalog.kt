@@ -1,3 +1,4 @@
+/*
 package com.example.playingwithmotionlayout.component
 
 import android.util.Log
@@ -19,7 +20,7 @@ import androidx.constraintlayout.compose.MotionLayout
 import androidx.constraintlayout.compose.MotionScene
 import com.example.model.Item
 import com.example.playingwithmotionlayout.component.management.ToolbarState
-import com.example.playingwithmotionlayout.dummyData.ListPreviewParameterProvider
+import com.example.playingwithmotionlayout.model.ListPreviewParameterProvider
 import com.example.playingwithmotionlayout.ui.theme.PlayingWithMotionLayoutTheme
 import com.example.scrollflags.ExitUntilCollapsedState
 
@@ -66,10 +67,13 @@ fun ProductCatalog(
         val propertiesOfContentImage = motionProperties(id = "content_img")   //motionProperties -> to get the custom properties
 
         Box(modifier = modifier) {
-            /**
+            */
+/**
              * Collapsing Toolbar
-             */
-            /*CollapsingToolbar(
+             *//*
+
+            */
+/*CollapsingToolbar(
                 backgroundImageResId = R.drawable.ic_starwars,
                 progress = toolbarState.progress,
                 modifier = Modifier
@@ -78,10 +82,13 @@ fun ProductCatalog(
                     .height(with(LocalDensity.current) { toolbarState.height.toDp() })
                     .graphicsLayer { translationY = toolbarState.offset }
                     .zIndex(1f)
-            )*/
-            /**
+            )*//*
+
+            */
+/**
              * Grid list
-             */
+             *//*
+
             GridItemHandler(
                 list = item,
                 columns = columns,
@@ -91,22 +98,26 @@ fun ProductCatalog(
 //                scrollState = scrollState,
                 contentPadding = PaddingValues(top = MaxToolbarHeight)
             )
-            /*Toolbar(
+            */
+/*Toolbar(
                 progress = toolbarState.progress,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(with(LocalDensity.current) { toolbarState.height.toDp()})
                     .graphicsLayer { translationY = toolbarState.offset }
-            )*/
+            )*//*
 
 
-            /*Image(
+
+            */
+/*Image(
                 painter = painterResource(id = R.drawable.ic_baby_yoda),
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.size(100.dp)
                     .layoutId("content_img"),
                 contentDescription = "Content image holder"
-            )*/
+            )*//*
+
         }
     }
 }
@@ -123,4 +134,4 @@ fun CatalogPreview(
             modifier = Modifier.fillMaxSize()
         )
     }
-}
+}*/

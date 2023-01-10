@@ -29,8 +29,8 @@
         end: ['parent', 'end']
       },
       content_img: {  // Assigned ID for profile pic, which we'll use in the code for the reference
-        width: 95,
-        height: 108,
+        width: 100,
+        height: 120,
 //        top: ['parent', 'top', 10],
         bottom: ['data_content', 'top', -60], //bottom Constraint => [Constraining to what, where, Margin]
         start: ['parent', 'start', 32], //start Constraint
@@ -70,8 +70,8 @@
         alpha: 0
       },
       content_img: {  // Assigned ID for content img, which we'll use in the code for the reference
-        width: 95,
-        height: 108,
+        width: 100,
+        height: 120,
         top: ['parent', 'top', 50], //bottom Constraint => [Constraining to what, where, Margin]
         start: ['parent', 'start', 16], //start Constraint
 //        start: ['data_content', 'start'],
@@ -88,7 +88,7 @@
         start: ['parent]', 'start', 16],
         top: ['parent]', 'top', 20],
         custom: {
-          textColor: '#C20312'
+          textColor: '#606C38'
         }
       }
     }
