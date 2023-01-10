@@ -16,6 +16,8 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.layoutId
@@ -39,47 +41,14 @@ class MainActivity : ComponentActivity() {
         setContent {
             PlayingWithMotionLayoutTheme {
                 val lazyScrollState = rememberLazyListState()
-                Scaffold(
+                Scaffold(//
                     modifier = Modifier
                         .fillMaxSize(),
                     topBar = {
                         MotionAppBar(lazyScrollState)
                     }
                 ) {
-                    /*LazyColumn(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(backgroundColor)
-                            .animateContentSize(),
-                        state = lazyScrollState
-                    ) {
-                        itemsIndexed(repos) { index, item ->
-                            //3. List item
-                            RepoItem(repo = item)
-                            *//*ProductCatalog(
-                                item = populateList(),
-                                columns = 2)*//*
-                            if (index != repos.lastIndex)
-                                Divider(modifier = Modifier.padding(8.dp))
-                        }
-                    }*/
-                    //...
-                    /*Column(
-                        verticalArrangement = Arrangement.Center,
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(Color.Black)
-                            .animateContentSize()
-                    ) {
-                        ProductCatalog(
-                            item = populateList(),
-                            columns = 2,
-                        )
-                    }*/
-                    //...
-                    val scrollState = rememberScrollState()
-
-                    LazyColumn(
+                    LazyColumn(//
                         modifier = Modifier
                             .fillMaxSize()
                             .background(DarkPurple)    // bg color of the Grid content
@@ -89,14 +58,14 @@ class MainActivity : ComponentActivity() {
                         itemsIndexed(populateList()) { index, item ->
                             //3. List item
 //                            RepoItem(repo = item)
-                            GridItemHandler(
+                            GridItemHandler(//
                                 list = populateList(),
                                 columns = 2,
                                 modifier = Modifier
                                     .layoutId("data_content")
-                                    .zIndex(0f),
+                                    .zIndex(1f)
 //                                scrollState = scrollState,
-                                contentPadding = PaddingValues(top = MaxToolbarHeight)
+//                                contentPadding = PaddingValues(top = MaxToolbarHeight)
                             )
 //                            if (index != repos.lastIndex)
 //                                Divider(modifier = Modifier.padding(8.dp))
@@ -107,6 +76,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
 
 @OptIn(ExperimentalMotionApi::class)
 @Composable
@@ -120,11 +90,11 @@ fun MotionAppBar(lazyScrollState: LazyListState) {
 
     val progress by animateFloatAsState(
         targetValue = if (lazyScrollState.firstVisibleItemIndex in 0..1) 0f else 1f,
-        tween(500)
+        tween(1000)
     )
     val motionHeight by animateDpAsState(
-        targetValue = if (lazyScrollState.firstVisibleItemIndex in 0..1) 250.dp else 30.dp,
-        tween(500)
+        targetValue = if (lazyScrollState.firstVisibleItemIndex in 0..1) 250.dp else 60.dp,
+        tween(800)
     )
 
     // handle composables within motion layout just like xml, first is always on bottom
@@ -138,114 +108,61 @@ fun MotionAppBar(lazyScrollState: LazyListState) {
             progress = progress,
             modifier = Modifier
                 .fillMaxWidth()
-//                .background(Color.Cyan) //Extra space below the image
+                .background(DarkPurple) //Extra space below the image
                 .height(motionHeight)
         ) {
 
-            val boxProperties = motionProperties(id = "box")
+            val boxProperties = motionProperties(id = "collapsing_box")
             val roundedShape = RoundedCornerShape(
                 bottomStart = boxProperties.value.int("roundValue").dp,
                 bottomEnd = boxProperties.value.int("roundValue").dp
             )
             /**
-             * bg-image
+             * bg-box
              **/
-            /*Image(
-                painter = painterResource(id = R.drawable.design),
-                contentDescription = null,
-                contentScale = ContentScale.Fit,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .clip(roundedShape)
-                    .layoutId("box_image")
-            )*/
-            //...........
-            /*Image(
-                painter = painterResource(id = backgroundImageResId),
-                contentDescription = null,
-                contentScale = ContentScale.FillWidth,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .graphicsLayer {
-                        alpha = progress * Alpha
-                    },
-                alignment = BiasAlignment(0f, 1f - ((1f - progress) * 0.75f))
-            )*/
-
-            /*Box(    //Top bar collapsing Box/ bg-image
+            /*Box(
                 modifier = Modifier
                     .layoutId("collapsing_box")
                     .clip(roundedShape)
-                    *//*.paint(
-                        painterResource(id = R.drawable.ic_starwars)
+                    *//*.background(
+                        brush = Brush.verticalGradient(
+                            colors,
+                            endY = 350f
+                        )
                     )*//*
-                    .graphicsLayer {
-                        alpha = progress * Alpha
-                    },
-                contentAlignment = BiasAlignment(0f, 1f - ((1f - progress) * 0.75f))
-            ) {*/
+            )*/
+            /**
+             * bg-image
+             **/
             Image(
                 painter = painterResource(id = R.drawable.ic_starwars),
                 contentDescription = null,
-                contentScale = ContentScale.FillWidth,
+                contentScale = ContentScale.FillBounds,
                 modifier = Modifier
+                    .layoutId("collapsing_box")
                     .fillMaxSize()
                     .graphicsLayer {
-                        alpha = progress * Alpha
+                        alpha = 1f
                     },
                 alignment = BiasAlignment(0f, 1f - ((1f - progress) * 0.75f))
             )
-//            }
-
-            /**
-             * Sub image
-             **/
-            /*Image(
-                painter = painterResource(id = R.drawable.compose_icon),
-                contentDescription = null,
-                modifier = Modifier
-                    .layoutId("weapon_icon")
-                    .background(
-                        brush = Brush.radialGradient(
-                            colors = listOf(
-                                Color.White,
-                                Color.Transparent
-                            )
-                        )
-                    )
-            )*/
             /**
              * Text - Collapsing
              */
             val motionTextProperties = motionProperties(id = "motion_text")
 
-            /*Text(
-                text = "Astro",
-                fontSize = 24.sp,
-                fontWeight = if (progress == 1f) FontWeight.Light else FontWeight.Bold,
-                color = Color.White,
-                modifier = Modifier.layoutId("user_name")
-            )*/
-
             Text(
                 text = stringResource(id = R.string.collapsing_text_star_wars_IX),
                 color = motionTextProperties.value.color("textColor"),
-                fontWeight = if (progress == 1f) FontWeight.Light else FontWeight.Bold,
+//                fontWeight = if (progress == 1f) FontWeight.Light else FontWeight.Bold,
+                fontWeight = FontWeight.Bold,
                 modifier = Modifier.layoutId("motion_text")
             )
             /**
              * Main image
              **/
-            /*Image(
-                painter = painterResource(id = R.drawable.ic_darth_vader),
-                contentDescription = null,
-                modifier = Modifier
-                    .clip(CircleShape)
-                    .layoutId("user_image")
-            )*/
-            //...
             Image(
-                painter = painterResource(id = R.drawable.ic_darth_vader),
+                painter = painterResource(id = R.drawable.ic_mando),
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .layoutId("content_img")

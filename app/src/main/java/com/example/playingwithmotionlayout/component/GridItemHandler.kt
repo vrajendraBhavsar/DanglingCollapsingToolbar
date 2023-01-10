@@ -68,7 +68,7 @@ fun GridItemHandler(
 
                 Spacer(
                     modifier = Modifier
-                        .fillMaxHeight()
+                        .height(2.dp)
                         .width(contentPadding.calculateStartPadding(LocalLayoutDirection.current))
                 )
 
@@ -88,7 +88,7 @@ fun GridItemHandler(
 
                 Spacer(
                     modifier = Modifier
-                        .fillMaxHeight()
+                        .height(2.dp)
                         .width(contentPadding.calculateEndPadding(LocalLayoutDirection.current))
                 )
             }
@@ -96,7 +96,7 @@ fun GridItemHandler(
 
         Spacer(
             modifier = Modifier
-                .fillMaxWidth()
+                .height(2.dp)
                 .height(contentPadding.calculateBottomPadding())
         )
     }

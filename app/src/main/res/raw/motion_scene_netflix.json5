@@ -4,11 +4,24 @@
     //1. Start Constraint
     start: {
       collapsing_box: {
-        width: 'spread',
-        height: 56,
+        width: 'parent',
+        height: 'parent',
         start: ['parent', 'start'],
         end: ['parent', 'end'],
         top: ['parent', 'top'],
+        bottom: ['parent', 'bottom'],
+        custom: {
+          roundValue: 20
+        }
+      },
+      collapsing_box_image:{
+        width: 'spread',
+        height: 'spread',
+        start: ['collapsing_box', 'start'],
+        end: ['collapsing_box', 'end'],
+        top: ['collapsing_box', 'top'],
+        bottom: ['collapsing_box', 'bottom'],
+        alpha: 1
       },
       data_content: {
         bottom: ['parent', 'bottom'],
@@ -18,8 +31,13 @@
       content_img: {  // Assigned ID for profile pic, which we'll use in the code for the reference
         width: 95,
         height: 108,
+//        top: ['parent', 'top', 10],
         bottom: ['data_content', 'top', -60], //bottom Constraint => [Constraining to what, where, Margin]
-        start: ['parent', 'start', 16], //start Constraint
+        start: ['parent', 'start', 32], //start Constraint
+//        start: ['parent', 'start'],
+//        end: ['parent', 'end'],
+//        top: ['collapsing_box', 'bottom'],
+//        bottom: ['collapsing_box', 'bottom']
       },
       motion_text: {
         top: ['content_img', 'top'],
@@ -32,28 +50,45 @@
     //2. End Constraint
     end: {
       collapsing_box: {  //Background
-        width: 'spread',  //spread -> is for fill constraints. Like in XML you'd set width/height = '0dp' to let it fill the available area only.
-        height: 56,
-        start: ['parent', 'start'],
-        end: ['parent', 'end'],
-        top: ['parent', 'top'],
+        width: 'wrap',  //spread -> is for fill constraints. Like in XML you'd set width/height = '0dp' to let it fill the available area only.
+        height: 'wrap',
+        start: ['content_img', 'start'],
+        end: ['content_img', 'end'],
+        top: ['content_img', 'top'],
+        bottom: ['content_img', 'bottom'],
+        custom: {
+          roundValue: 0
+        }
+      },
+      collapsing_box_image:{
+        width: 'spread',
+        height: 'spread',
+        start: ['collapsing_box', 'start'],
+        end: ['collapsing_box', 'end'],
+        top: ['collapsing_box', 'top'],
+        bottom: ['collapsing_box', 'bottom'],
+        alpha: 0
       },
       content_img: {  // Assigned ID for content img, which we'll use in the code for the reference
         width: 95,
         height: 108,
-        bottom: ['data_content', 'top', -60], //bottom Constraint => [Constraining to what, where, Margin]
+        top: ['parent', 'top', 50], //bottom Constraint => [Constraining to what, where, Margin]
         start: ['parent', 'start', 16], //start Constraint
+//        start: ['data_content', 'start'],
+//        top: ['data_content', 'top'],
+//        end: ['data_content', 'end']
       },
       data_content: {
+        top: ['parent', 'top'],
         bottom: ['parent', 'bottom'],
         start: ['parent', 'start'],
         end: ['parent', 'end']
       },
       motion_text: {
-        start: ['content_img', 'start'],
-        top: ['content_img', 'bottom', 8],
+        start: ['parent]', 'start', 16],
+        top: ['parent]', 'top', 20],
         custom: {
-          textColor: '#2B3784'
+          textColor: '#C20312'
         }
       }
     }
@@ -67,11 +102,17 @@
         KeyAttributes: [ //We define different Attr and how we want this to Animate, during transition for specific composable
           {
             target: ['content_img'],
-            frames: [0, 50, 100], //For frames we pass a List containing number between 0 - 100
+            frames: [0, 20, 100], //For frames we pass a List containing number between 0 - 100
             rotationZ: [0, 50, 0],
             scaleX: [1, 2, 1],
             scaleY: [1, 2, 1],
+            alpha: [1, 0.5, 0],
             translationZ: [0,50,100]
+          },
+          {
+            target: ['collapsing_box'],
+            frames: [0, 50, 100], //For frames we pass a List containing number between 0 - 100
+            alpha: [1, 0.5, 0]
           }
         ],
       },
