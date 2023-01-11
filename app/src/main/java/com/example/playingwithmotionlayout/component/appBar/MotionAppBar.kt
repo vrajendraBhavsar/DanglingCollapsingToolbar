@@ -1,5 +1,6 @@
 package com.example.playingwithmotionlayout.component.appBar
 
+import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -27,7 +28,9 @@ import androidx.constraintlayout.compose.ExperimentalMotionApi
 import androidx.constraintlayout.compose.MotionLayout
 import androidx.constraintlayout.compose.MotionScene
 import com.example.playingwithmotionlayout.R
+import com.example.playingwithmotionlayout.common.isScrolled
 import com.example.playingwithmotionlayout.ui.theme.LeafyGreen
+import java.lang.reflect.Array.get
 
 @OptIn(ExperimentalMotionApi::class)
 @Composable
@@ -38,6 +41,8 @@ fun MotionAppBar(lazyScrollState: LazyListState) {
         targetValue = if (lazyScrollState.firstVisibleItemIndex in 0..1) 0f else 1f,
         tween(1000)
     )
+//    val progress: Float
+//    get() = 1 - (maxHeight - height) / rangeDifference
     val motionScene = remember {
         context.resources.openRawResource(R.raw.motion_scene_netflix).readBytes().decodeToString()
     }
@@ -45,6 +50,11 @@ fun MotionAppBar(lazyScrollState: LazyListState) {
         targetValue = if (lazyScrollState.firstVisibleItemIndex in 0..1) 300.dp else 60.dp,
         tween(1000)
     )
+    //Worked code
+    /*val motionHeight by animateDpAsState(
+        targetValue = if (lazyScrollState.isScrolled) 60.dp else 300.dp,
+        tween(1000)
+    )*/
 
     // handle composables within motion layout just like xml, first is always on bottom
 
@@ -58,6 +68,7 @@ fun MotionAppBar(lazyScrollState: LazyListState) {
             modifier = Modifier
                 .fillMaxWidth()
                 .background(LeafyGreen) //Extra space below the image
+//                .animateContentSize(animationSpec = tween(durationMillis = 300))
                 .height(motionHeight)
         ) {
 

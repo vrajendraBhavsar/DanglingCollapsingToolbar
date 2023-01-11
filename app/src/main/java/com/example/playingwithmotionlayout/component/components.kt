@@ -1,3 +1,4 @@
+/*
 package com.example.playingwithmotionlayout.component
 
 import android.content.res.Configuration
@@ -115,6 +116,7 @@ fun RepoItem(
 
 //...
 
+*/
 /*@Composable
 fun RepoItemzz(
     modifier: Modifier = Modifier,
@@ -172,7 +174,8 @@ fun RepoItemzz(
         )
     }
 
-}*/
+}*//*
+
 
 //...
 
@@ -276,3 +279,4 @@ val repos = listOf(
 fun RepoItemPreview() {
     RepoItem(repo = repos.first())
 }
+*/
