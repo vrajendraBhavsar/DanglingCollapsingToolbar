@@ -1,5 +1,6 @@
 package com.example.playingwithmotionlayout.component.appBar
 
+import android.media.Image
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
@@ -24,13 +25,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import androidx.constraintlayout.compose.ExperimentalMotionApi
 import androidx.constraintlayout.compose.MotionLayout
+import androidx.constraintlayout.compose.MotionLayoutDebugFlags
 import androidx.constraintlayout.compose.MotionScene
 import com.example.playingwithmotionlayout.R
 import com.example.playingwithmotionlayout.common.isScrolled
 import com.example.playingwithmotionlayout.ui.theme.LeafyGreen
 import java.lang.reflect.Array.get
+import java.util.*
 
 @OptIn(ExperimentalMotionApi::class)
 @Composable
@@ -69,7 +73,8 @@ fun MotionAppBar(lazyScrollState: LazyListState) {
                 .fillMaxWidth()
                 .background(LeafyGreen) //Extra space below the image
 //                .animateContentSize(animationSpec = tween(durationMillis = 300))
-                .height(motionHeight)
+                .height(motionHeight),
+            debug = EnumSet.of(MotionLayoutDebugFlags.NONE)
         ) {
 
             val boxProperties = motionProperties(id = "collapsing_box")
@@ -133,7 +138,6 @@ fun MotionAppBar(lazyScrollState: LazyListState) {
                     .layoutId("content_img")
                     .size(width = 72.dp, height = 92.dp)
                     .clip(RoundedCornerShape(5.dp)),
-//                    .zIndex(2f),
                 contentDescription = "Content image holder"
             )
         }
